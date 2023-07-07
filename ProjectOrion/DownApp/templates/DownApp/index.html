@@ -97,11 +97,15 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#exportButton').click(function() {
+    $(document).ready(function() {
+        $('#exportButton').click(function() {
+            var field1Value = $('input[name="field1"]').val();
+            var field2Value = $('input[name="field2"]').val();
+
+            if (field1Value < field2Value) {
                 var formData = new FormData();
-                formData.append('field1', $('input[name="field1"]').val());
-                formData.append('field2', $('input[name="field2"]').val());
+                formData.append('field1', field1Value);
+                formData.append('field2', field2Value);
                 formData.append('type_of_down', $('#type_of_down').val());
 
                 $('#loading').show();
@@ -114,12 +118,14 @@
                     contentType: false,
                     success: function(response) {
                         $('#loading').hide();
-
                         window.location.href = '/download/' + response.filename;
                     }
                 });
-            });
+            } else {
+                alert("Дата начала выгрузки должна быть до дати окончания");
+            }
         });
-    </script>
+    });
+</script>
 </body>
 </html>
