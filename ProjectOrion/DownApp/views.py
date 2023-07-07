@@ -2,7 +2,7 @@ from django.shortcuts import render
 import os
 import tempfile
 import xlwt
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import hashlib
 import requests
