@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Приложение выгрузки</title>
+    <!-- Подключите стили, скрипты и другие ресурсы -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row">
+<!--        <input type="text" name="field1">-->
+<!--        <input type="text" name="field2">-->
+        <style>
+  .custom-select {
+    display: inline-block;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 8px 30px 8px 10px;
+    border-radius: 4px;
+  }
+
+  .custom-select:after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+   </style>
+
+        <div class='col-3'>
+            <br>
+            <select name="type_of_down" id="type_of_down" class="custom-select">
+                <option value="1">Выгрузка товаров по акции</option>
+                <option value="2">Выгрузка остатков по складу</option>
+            </select>
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class='col-3'>
+            <label class="form-label"> <b>Дата начала выгрузки</b></label>
+            <div class='input-group date' id='datetimepicker2'>
+               <input type='date' class="form-control" name="field1" />
+               <span class="input-group-addon">
+               <span class="glyphicon glyphicon-calendar"></span>
+               </span>
+            </div>
+        </div>
+
+          <script type="text/javascript">
+             $(function () {
+                 $('#datetimepicker2').datetimepicker({
+                     locale: 'ru'
+                 });
+             });
+          </script>
+    </div>
+
+    <div class="row">
+      <div class='col-3'>
+            <label class="form-label"> <b>Дата конца выгрузки</b></label>
+            <div class='input-group date' id='datetimepicker3'>
+               <input type='date' class="form-control" name="field2" />
+               <span class="input-group-addon">
+               <span class="glyphicon glyphicon-calendar"></span>
+               </span>
+            </div>
+        <script type="text/javascript">
+         $(function () {
+             $('#datetimepicker2').datetimepicker({
+                 locale: 'ru'
+             });
+         });
+      </script>
+      </div>
+    </div>
+
+
+    <br>
+        <button type="button" id="exportButton" class="btn btn-success">Выгрузить</button>
+
+        <div id="loading" style="display: none;">
+          <div class="loader"></div>
+          <div class="progress-text"><b>Файл формируется, пожалуйста, подождите...</b></div>
+        </div>
+
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#exportButton').click(function() {
+                var formData = new FormData();
+                formData.append('field1', $('input[name="field1"]').val());
+                formData.append('field2', $('input[name="field2"]').val());
+                formData.append('type_of_down', $('#type_of_down').val());
+
+                $('#loading').show();
+
+                $.ajax({
+                    url: '/export/',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#loading').hide();
+
+                        window.location.href = '/download/' + response.filename;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
