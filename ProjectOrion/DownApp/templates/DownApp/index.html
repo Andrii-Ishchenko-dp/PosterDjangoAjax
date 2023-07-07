@@ -101,12 +101,16 @@
         $('#exportButton').click(function() {
             var field1Value = $('input[name="field1"]').val();
             var field2Value = $('input[name="field2"]').val();
+            var typeOfDownValue = $('#type_of_down').val();
 
-            if (field1Value < field2Value) {
+            var field1Month = field1Value.substring(5, 7);
+            var field2Month = field2Value.substring(5, 7);
+
+            if (field1Value < field2Value && field1Month === field2Month) {
                 var formData = new FormData();
                 formData.append('field1', field1Value);
                 formData.append('field2', field2Value);
-                formData.append('type_of_down', $('#type_of_down').val());
+                formData.append('type_of_down', typeOfDownValue);
 
                 $('#loading').show();
 
@@ -122,10 +126,14 @@
                     }
                 });
             } else {
-                alert("Дата начала выгрузки должна быть до дати окончания");
+                if (field1Value >= field2Value) {
+                    alert("Значение field1 должно быть меньше значения field2");
+                } else {
+                    alert("Выгрузка должна быть в пределах одного месяца");
+                }
             }
         });
     });
-</script>
+    </script>
 </body>
 </html>
