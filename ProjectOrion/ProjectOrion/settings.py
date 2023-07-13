@@ -51,6 +51,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+X_FRAME_OPTIONS = 'ALLOW'
+
 ROOT_URLCONF = 'ProjectOrion.urls'
 
 TEMPLATES = [
