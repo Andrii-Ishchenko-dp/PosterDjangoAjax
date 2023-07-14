@@ -16,10 +16,6 @@ access_token = '578064:4602865fe26394f496eb17b40a03f60b'
 @csrf_exempt
 def index(request):
     otvet = request.GET.get('posterToken')
-    data = {
-        'access_token': 'access_token'
-    }
-    accaunt_token = 'Andii_token'
 
     response = render(request, 'DownApp/index.html')
 
@@ -36,45 +32,26 @@ def index(request):
 
 
         access_token = data['access_token']
-        # accaunt_token = data['access_token']
+        global access_token
 
-        print('Токен доступа при записи: ', access_token)
+        print('Токен доступа при авторизации: ', access_token)
         # client_data = {
         #     'access_token': data['access_token'],
         #     'account_number': data['account_number']
         # }
         # database.child("accaunt").child('{}'.format(data['account_number'])).set(client_data)
 
-    print('Токен на выходе: ', data['access_token'])
-    # response.set_cookie(key='api_key', value=accaunt_token)
-    # response.write('')
-
     return response
 
 
 @csrf_exempt
 def export_data(request):
-    # if request.method == 'POST':
-    #     field1 = request.POST.get('field1')
-    #     field2 = request.POST.get('field2')
-    #
-    #     workbook = xlwt.Workbook()
-    #     sheet = workbook.add_sheet('Data')
-    #     sheet.write(0, 0, field1)
-    #     sheet.write(0, 1, field2)
-
-    value_cook = request.COOKIES.get('api_key')
-    print("Значение куки ", value_cook)
-
-    print('token in page: ', access_token)
-    # znachenie = request.POST.get('znachenie')
 
     if (request.method == 'POST'):
 
-        print(request.POST.get('type_of_down'))
         if request.POST.get('type_of_down') == '1':
             token = access_token
-            print('token: ', token)
+            print('token при вигрузці товарів по акції: ', token)
             cheks = []
             count_cheks = 0
             data_start = request.POST.get('field1')
