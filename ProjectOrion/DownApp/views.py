@@ -30,9 +30,9 @@ def index(request):
         data = requests.post('https://joinposter.com/api/v2/auth/manage', data=auth).json()
         data = dict(data)
 
-
-        access_token = data['access_token']
         global access_token
+        access_token = data['access_token']
+
 
         print('Токен доступа при авторизации: ', access_token)
         # client_data = {
