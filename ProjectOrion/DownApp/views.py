@@ -13,6 +13,8 @@ app_id = 2659
 app_key = '7776c65da87f8e3856d6befb30f1d46b'
 access_token = '578064:4602865fe26394f496eb17b40a03f60b'
 
+# пуш проекта с мака
+
 @csrf_exempt
 def index(request):
     otvet = request.GET.get('posterToken')
