@@ -32,19 +32,18 @@ def index(request):
 
         data = requests.post('https://joinposter.com/api/v2/auth/manage', data=auth).json()
         data = dict(data)
-        print(data)
-        #
+
         # C = cookies.SimpleCookie()
         # C["fig"] = "newton"
 
         global access_token
         access_token = data['access_token']
 
-        url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
-        url_params['access_token'] = access_token
-        new_url = request.path + '?' + url_params.urlencode()
-
-
+        # url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
+        # url_params['access_token'] = access_token
+        # new_url = request.path + '?' + url_params.urlencode()
+        #
+        # return redirect(new_url)
 
 
         print('Токен доступа при авторизации: ', access_token)
@@ -54,7 +53,7 @@ def index(request):
         # }
         # database.child("accaunt").child('{}'.format(data['account_number'])).set(client_data)
 
-    return redirect(new_url)
+    return response
 
 
 @csrf_exempt
