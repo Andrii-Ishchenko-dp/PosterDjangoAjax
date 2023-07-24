@@ -44,7 +44,7 @@ def index(request):
         url_params['access_token'] = access_token
         new_url = request.path + '?' + url_params.urlencode()
 
-        return redirect(new_url)
+
 
 
         print('Токен доступа при авторизации: ', access_token)
@@ -54,7 +54,7 @@ def index(request):
         # }
         # database.child("accaunt").child('{}'.format(data['account_number'])).set(client_data)
 
-    return response
+    return redirect(new_url)
 
 
 @csrf_exempt
