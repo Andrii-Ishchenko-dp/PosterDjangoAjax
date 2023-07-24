@@ -8,10 +8,13 @@ import hashlib
 import requests
 from django.http import HttpResponse, HttpResponseNotFound
 import time
+from http import cookies
 
 app_id = 2659
 app_key = '7776c65da87f8e3856d6befb30f1d46b'
 access_token = '578064:4602865fe26394f496eb17b40a03f60b'
+
+# пуш проекта с мака
 
 @csrf_exempt
 def index(request):
@@ -29,6 +32,9 @@ def index(request):
 
         data = requests.post('https://joinposter.com/api/v2/auth/manage', data=auth).json()
         data = dict(data)
+
+        C = cookies.SimpleCookie()
+        C["fig"] = "newton"
 
         global access_token
         access_token = data['access_token']
