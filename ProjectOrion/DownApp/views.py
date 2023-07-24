@@ -41,7 +41,7 @@ def index(request):
 
         url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
         url_params['access_token'] = access_token
-        new_url = request.path + '?' + url_params.urlencode()
+        response = request.path + '?' + url_params.urlencode()
 
 
 
@@ -53,7 +53,7 @@ def index(request):
         # }
         # database.child("accaunt").child('{}'.format(data['account_number'])).set(client_data)
 
-    return redirect(new_url)
+    return redirect(response)
 
 
 @csrf_exempt
