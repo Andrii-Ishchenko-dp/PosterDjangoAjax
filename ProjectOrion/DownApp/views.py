@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import os
 import tempfile
 import xlwt
@@ -33,6 +33,12 @@ def index(request):
         global access_token
         access_token = data['access_token']
 
+        url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
+        url_params['access_token'] = access_token
+        new_url = request.path + '?' + url_params.urlencode()
+
+        return redirect(new_url)
+
 
         print('Токен доступа при авторизации: ', access_token)
         # client_data = {
@@ -51,7 +57,8 @@ def export_data(request):
 
         if request.POST.get('type_of_down') == '1':
             token = access_token
-            print('token при вигрузці товарів по акції: ', token)
+            tokenDostupu = request.GET.get('posterToken') #намагаюсь считати токен з URL
+            print('token при вигрузці товарів по акції: ', tokenDostupu)
             cheks = []
             count_cheks = 0
             data_start = request.POST.get('field1')
