@@ -53,7 +53,7 @@ def index(request):
         # }
         # database.child("accaunt").child('{}'.format(data['account_number'])).set(client_data)
 
-    return redirect(response)
+    return response
 
 
 @csrf_exempt
