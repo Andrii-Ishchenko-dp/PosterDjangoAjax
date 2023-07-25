@@ -21,6 +21,8 @@ def index(request):
     otvet = request.GET.get('posterToken')
     access_token = '578064:4602865fe26394f496eb17b40a03f60b'
 
+
+
     if otvet != None:
         auth = {
             'application_id': app_id,
@@ -32,7 +34,7 @@ def index(request):
         data = requests.post('https://joinposter.com/api/v2/auth/manage', data=auth).json()
         data = dict(data)
 
-        global access_token
+        # global access_token
         access_token = data['access_token']
 
         #url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
