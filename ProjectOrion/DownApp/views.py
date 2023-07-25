@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 import os
 import tempfile
 import xlwt
@@ -8,7 +8,7 @@ import hashlib
 import requests
 from django.http import HttpResponse, HttpResponseNotFound
 import time
-from http import cookies
+
 
 app_id = 2659
 app_key = '7776c65da87f8e3856d6befb30f1d46b'
@@ -19,8 +19,7 @@ access_token = '578064:4602865fe26394f496eb17b40a03f60b'
 @csrf_exempt
 def index(request):
     otvet = request.GET.get('posterToken')
-
-    response = render(request, 'DownApp/index.html')
+    access_token = '578064:4602865fe26394f496eb17b40a03f60b'
 
     if otvet != None:
         auth = {
@@ -41,10 +40,7 @@ def index(request):
 
         url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
         url_params['access_token'] = access_token
-        response = request.path + '?' + url_params.urlencode()
-
-
-
+        # response = request.path + '?' + url_params.urlencode()
 
         print('Токен доступа при авторизации: ', access_token)
         # client_data = {
@@ -53,16 +49,18 @@ def index(request):
         # }
         # database.child("accaunt").child('{}'.format(data['account_number'])).set(client_data)
 
+    response = render(request, 'DownApp/index.html', context=access_token)
+
     return response
 
 
 @csrf_exempt
-def export_data(request):
+def export_data(request, context):
 
     if (request.method == 'POST'):
 
         if request.POST.get('type_of_down') == '1':
-            token = access_token
+            token = context
             tokenDostupu = request.GET.get('posterToken') #намагаюсь считати токен з URL
             print('token при вигрузці товарів по акції: ', tokenDostupu)
             cheks = []
