@@ -32,9 +32,6 @@ def index(request):
         data = requests.post('https://joinposter.com/api/v2/auth/manage', data=auth).json()
         data = dict(data)
 
-        # C = cookies.SimpleCookie() # спроба зберегти токен в кукі
-        # C["fig"] = "newton"
-
         global access_token
         access_token = data['access_token']
 
