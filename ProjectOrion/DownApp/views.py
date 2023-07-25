@@ -38,8 +38,8 @@ def index(request):
         global access_token
         access_token = data['access_token']
 
-        url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
-        url_params['access_token'] = access_token
+        #url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
+        #url_params['access_token'] = access_token
         # response = request.path + '?' + url_params.urlencode()
 
         print('Токен доступа при авторизации: ', access_token)
