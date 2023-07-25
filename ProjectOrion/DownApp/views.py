@@ -20,8 +20,7 @@ access_token = '578064:4602865fe26394f496eb17b40a03f60b'
 def index(request):
     otvet = request.GET.get('posterToken')
     access_token = '578064:4602865fe26394f496eb17b40a03f60b'
-
-
+    con=[]
 
     if otvet != None:
         auth = {
@@ -37,6 +36,8 @@ def index(request):
         # global access_token
         access_token = data['access_token']
 
+        con.append(access_token)
+
         #url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
         #url_params['access_token'] = access_token
         # response = request.path + '?' + url_params.urlencode()
@@ -48,7 +49,7 @@ def index(request):
         # }
         # database.child("accaunt").child('{}'.format(data['account_number'])).set(client_data)
 
-    response = render(request, 'DownApp/index.html', context=access_token)
+    response = render(request, 'DownApp/index.html', context=con)
 
     return response
 
