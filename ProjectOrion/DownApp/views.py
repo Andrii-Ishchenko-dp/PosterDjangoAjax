@@ -55,12 +55,12 @@ def index(request):
 
 
 @csrf_exempt
-def export_data(request, con):
+def export_data(request):
 
     if (request.method == 'POST'):
 
         if request.POST.get('type_of_down') == '1':
-            token = con(0)
+            token = request.POST.get('access_tok')
             tokenDostupu = request.GET.get('posterToken') #намагаюсь считати токен з URL
             print('token при вигрузці товарів по акції: ', tokenDostupu)
             cheks = []
