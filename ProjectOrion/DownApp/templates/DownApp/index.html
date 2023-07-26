@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<p>{{access}}</p>
+<p id="access_tok">{{access}}</p>
 
 <script>
     window.addEventListener('load', function () {
@@ -111,6 +111,7 @@
             var field1Value = $('input[name="field1"]').val();
             var field2Value = $('input[name="field2"]').val();
             var typeOfDownValue = $('#type_of_down').val();
+            var acce = $('#access_tok').val();
 
             var field1Month = field1Value.substring(5, 7);
             var field2Month = field2Value.substring(5, 7);
@@ -120,6 +121,7 @@
                 formData.append('field1', field1Value);
                 formData.append('field2', field2Value);
                 formData.append('type_of_down', typeOfDownValue);
+                formData.append('access_tok', acce);
 
                 $('#loading').show();
 
