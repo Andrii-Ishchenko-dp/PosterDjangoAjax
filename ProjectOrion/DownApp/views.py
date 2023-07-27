@@ -61,7 +61,6 @@ def export_data(request):
 
         if request.POST.get('type_of_down') == '1':
             token = request.POST.get('access_tok')
-            tokenDostupu = request.GET.get('posterToken') #намагаюсь считати токен з URL
             print('token при вигрузці товарів по акції: ', token)
             cheks = []
             count_cheks = 0
