@@ -61,7 +61,6 @@ def export_data(request):
 
         if request.POST.get('type_of_down') == '1':
             token = request.POST.get('access_tok')
-            tokenDostupu = request.GET.get('posterToken') #намагаюсь считати токен з URL
             print('token при вигрузці товарів по акції: ', token)
             cheks = []
             count_cheks = 0
@@ -189,6 +188,7 @@ def export_data(request):
 
 
         elif request.POST.get('type_of_down') == '2':
+            access_token = request.POST.get('access_tok')
             print('Код доступа при выгрузке остатков: ', access_token)
             storage = []  # склады в заведении, id, название
 
@@ -304,5 +304,5 @@ def download_file(request, filename):
             response['Content-Disposition'] = 'attachment; filename=' + filename
             return response
     else:
-        return HttpResponse('Файл не найден', status=404)
+        return HttpResponse('В указанный период нет данных. Перезайдите в приложение й выберете другой временной промежуток.', status=404)
 
