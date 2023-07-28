@@ -84,23 +84,12 @@ def export_data(request):
                 ws = wb.add_sheet('Нет продаж')
                 ws.write(0, 0, 'Нет продаж товаров по акции в указанный период времени')
 
-                with tempfile.TemporaryDirectory() as tmpdirname:
-                    output_path = os.path.join(tmpdirname, 'no_sale.xls')
-                    wb.save(output_path)
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.xls') as temp_file:
+                    wb.save(temp_file.name)
+                    filename = os.path.basename(temp_file.name)
 
-                    try:
-                        with open('{}/no_sale.xls'.format(tmpdirname), 'rb') as f:
-                            file_data = f.read()
-
-                        # sending response
-                        response = HttpResponse(file_data, content_type='application/vnd.ms-excel')
-                        response['Content-Disposition'] = 'attachment; filename="no_sale.xls"'
-
-                    except IOError:
-
-                        response = HttpResponseNotFound('<h1>File not exist</h1>')
-
-                    return response
+                data = {'filename': filename}
+                return JsonResponse(data)
 
             else:
                 for l in res_chek['response']:
@@ -304,5 +293,5 @@ def download_file(request, filename):
             response['Content-Disposition'] = 'attachment; filename=' + filename
             return response
     else:
-        return HttpResponse('В указанный период нет данных. Перезайдите в приложение й выберете другой временной промежуток.', status=404)
+        return HttpResponse('В указанный период нет данных. Перезайдите в приложение и выберете другой временной промежуток.', status=404)
 
