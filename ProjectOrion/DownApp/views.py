@@ -77,6 +77,7 @@ def export_data(request):
                        '&dateTo={}'
 
             res_chek = requests.get(url_dash.format(token, data_start_new, data_end_new)).json()
+            print(res_chek['response'])
 
             if len(res_chek['response']) < 1:
                 print('Выгрузка пустого файла')
