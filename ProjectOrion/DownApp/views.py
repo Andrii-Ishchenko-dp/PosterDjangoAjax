@@ -130,7 +130,7 @@ def export_data(request):
                     wb = xlwt.Workbook()
                     ws = wb.add_sheet('Нет продаж')
 
-                    ws.write(0, 0, 'Нет продаж акции в указанный период времени')
+                    ws.write(0, 0, 'Нет продаж по акции в указанный период времени')
 
                     with tempfile.NamedTemporaryFile(delete=False, suffix='.xls') as temp_file:
                         wb.save(temp_file.name)
@@ -152,7 +152,7 @@ def export_data(request):
                     count_prom += 1
 
                 # создал отдельный список акций, которые были задействованы в этом периоде времени
-                print('активние акции в этот период времени: ', prom)
+
                 wb = xlwt.Workbook()
                 activ_prom_with_name = []
 
