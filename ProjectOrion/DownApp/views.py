@@ -126,6 +126,18 @@ def export_data(request):
                         count_dish += 1
 
                 print('список блюд на которые распространялась акция: ', dish)
+                if len(dish)<1:
+                    wb = xlwt.Workbook()
+                    ws = wb.add_sheet('Нет продаж')
+                    ws.write(0, 0, 'Нет продаж акции в указанный период времени')
+
+                    with tempfile.NamedTemporaryFile(delete=False, suffix='.xls') as temp_file:
+                        wb.save(temp_file.name)
+                        filename = os.path.basename(temp_file.name)
+
+                    data = {'filename': filename}
+                    return JsonResponse(data)
+
                 prom = []
                 count_prom = 0
                 url_prom = 'https://joinposter.com/api/clients.getPromotions?token={}'
