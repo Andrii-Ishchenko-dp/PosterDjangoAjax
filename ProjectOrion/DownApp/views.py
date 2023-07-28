@@ -82,7 +82,7 @@ def export_data(request):
                 print('Выгрузка пустого файла')
                 wb = xlwt.Workbook()
                 ws = wb.add_sheet('Нет продаж')
-                ws.write(0, 0, 'Нет продаж товаров по акции в указанный период времени')
+                ws.write(0, 0, 'Нет продаж в указанный период времени')
 
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.xls') as temp_file:
                     wb.save(temp_file.name)
@@ -125,6 +125,7 @@ def export_data(request):
                                 activ_prom.append(dic_dish['promotion_id'])
                         count_dish += 1
 
+                print('список блюд на которые распространялась акция: ', dish)
                 prom = []
                 count_prom = 0
                 url_prom = 'https://joinposter.com/api/clients.getPromotions?token={}'
@@ -137,7 +138,8 @@ def export_data(request):
                     prom.append(dic_prom)
                     count_prom += 1
 
-                # создать отдельный список акций, которые были задействованы в этом периоде времени
+                # создал отдельный список акций, которые были задействованы в этом периоде времени
+                print('активние акции в этот период времени: ', prom)
                 wb = xlwt.Workbook()
                 activ_prom_with_name = []
 
