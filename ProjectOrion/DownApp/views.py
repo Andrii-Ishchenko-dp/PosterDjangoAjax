@@ -129,6 +129,7 @@ def export_data(request):
                 if len(dish)<1:
                     wb = xlwt.Workbook()
                     ws = wb.add_sheet('Нет продаж')
+
                     ws.write(0, 0, 'Нет продаж акции в указанный период времени')
 
                     with tempfile.NamedTemporaryFile(delete=False, suffix='.xls') as temp_file:
