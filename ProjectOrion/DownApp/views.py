@@ -263,9 +263,11 @@ def export_data(request):
                     kolichestvo_dnei = int(data_end_origin) - int(data_start_origin)
                     for q in range(kolichestvo_dnei + 1):
                         simple_date=int(data_start_origin) + q
-                        ws.write(0, q + 1, int(data_start_origin) + q)
+                        date_str = str(simple_date)
+                        formatted_date = f"{date_str[-2:]}.{date_str[4:6]}.{date_str[:4]}"
+                        ws.write(0, q + 1, formatted_date)
                         print(int(data_start_origin) + q)
-                        print('нова дата ', simple_date)
+                        print('нова дата ', formatted_date)
 
                     while data_start <= data_end:  # по датам
                         spisok = []  # список с полученной инфой по складу
