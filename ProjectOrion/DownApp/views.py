@@ -262,8 +262,11 @@ def export_data(request):
                     ws.write(0, 0, 'Название:')
                     kolichestvo_dnei = int(data_end_origin) - int(data_start_origin)
                     for q in range(kolichestvo_dnei + 1):
+                        simple_date=int(data_start_origin) + q
                         ws.write(0, q + 1, int(data_start_origin) + q)
                         print(int(data_start_origin) + q)
+                        print('нова дата ', simple_date)
+
                     while data_start <= data_end:  # по датам
                         spisok = []  # список с полученной инфой по складу
                         zvit_za_ruhom = requests.get(
