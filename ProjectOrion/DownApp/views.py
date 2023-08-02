@@ -33,14 +33,11 @@ def index(request):
         data = requests.post('https://joinposter.com/api/v2/auth/manage', data=auth).json()
         data = dict(data)
 
-        # global access_token
         access_token = data['access_token']
+        print(data)
 
         con['access'] = data['access_token']
 
-        #url_params = request.GET.copy() #блок котрий відповідає за додавання токену до URL
-        #url_params['access_token'] = access_token
-        # response = request.path + '?' + url_params.urlencode()
 
         print('Токен доступа при авторизации: ', access_token)
         # client_data = {
@@ -266,8 +263,6 @@ def export_data(request):
                         date_str = str(simple_date)
                         formatted_date = f"{date_str[-2:]}.{date_str[4:6]}.{date_str[:4]}"
                         ws.write(0, q + 1, formatted_date)
-                        print(int(data_start_origin) + q)
-                        print('нова дата ', formatted_date)
 
                     while data_start <= data_end:  # по датам
                         spisok = []  # список с полученной инфой по складу
